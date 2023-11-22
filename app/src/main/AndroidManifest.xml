@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Barberzur"
+        tools:targetApi="31">
+        <activity
+            android:name=".Vista.GaleriaFotos"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBZNM8GeZqy6I8zKVUC4XYjVmKQIWbqCgY" />
+
+        <activity
+            android:name=".Vista.MapaUbi"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.CerrarSesion"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.ConfigurarCuenta"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.HorasAgendadas"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.CancelarHoras"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.AgendarHora"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.RegistrarseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.InciarSesionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

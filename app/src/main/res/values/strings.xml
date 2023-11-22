@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Barberzur</string>
+
+    <string name="btn_inciar_pantalla">Iniciar Sesion</string>
+    <string name="btn_registrar_pantalla">Registrarse</string>
+
+    <string name="btn_iniciar_sesion">Inciar Sesion</string>
+
+    <string name="btn_registrarse_sesion">Registrarse</string>
+
+    <string name="hint_latitud">Latitud</string>
+    <string name="hint_longitud">Longitud</string>
+    
+    <string name="select">Select Item</string>
+    <string name="select2">Select Item</string>
+
+
+</resources>
