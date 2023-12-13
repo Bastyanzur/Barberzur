@@ -10,9 +10,24 @@
 
     <string name="hint_latitud">Latitud</string>
     <string name="hint_longitud">Longitud</string>
-    
+
     <string name="select">Select Item</string>
     <string name="select2">Select Item</string>
+    <string-array name="time_slots_array">
+        <item>13:00 PM</item>
+        <item>14:00 PM</item>
+        <item>15:00 PM</item>
+        <item>16:00 PM</item>
+        <item>17:00 PM</item>
+        <item>18:00 PM</item>
+        <item>19:00 PM</item>
+        <item>20:00 PM</item>
+        <item>21:00 PM</item>
+        <item>22:00 PM</item>
+
+        <!-- Agrega más horarios si es necesario -->
+    </string-array>
+
 
 
 </resources>

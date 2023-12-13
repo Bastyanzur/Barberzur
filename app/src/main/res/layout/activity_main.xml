@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_anchorGravity="center"
     tools:context=".Vista.MainActivity"
-    android:background="@drawable/fondo2">
+    android:background="@drawable/fondo">
 
     <Button
         android:id="@+id/RegistrarPantalla"

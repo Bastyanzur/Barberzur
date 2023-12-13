@@ -2,112 +2,119 @@ package com.example.barberzur.Vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.example.barberzur.R;
-import com.example.barberzur.controlador.ConexionHelper;
-import com.example.barberzur.controlador.Utility;
-import com.google.android.material.textfield.TextInputLayout;
+
+
+
+import android.widget.EditText;
+
+
+import androidx.annotation.NonNull;
+
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class InciarSesionActivity extends AppCompatActivity {
 
-    TextView emailTextInputLayout, passwordTextInputLayout;
+    private EditText editTextEmail, editTextPassword;
+    private Button btnLogin, btnIngresarRegistro, btnLogout;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inciar_sesion);
 
-        Button loginButton = findViewById(R.id.InciarSesion);
-        Button registerButton = findViewById(R.id.registerButton);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnLogout = findViewById(R.id.btnLogout);
 
-        // Obtén las referencias de TextInputLayout
-        emailTextInputLayout = findViewById(R.id.emailEditText);
-        passwordTextInputLayout = findViewById(R.id.passwordEditText);
+        mAuth = FirebaseAuth.getInstance();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btnIngresarRegistro = findViewById(R.id.btnregresarRegistro);
+
+        btnIngresarRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Valida el correo electrónico y la contraseña
-                if (validateForm()) {
-                    String email = emailTextInputLayout.getText().toString().trim();
-                    String password = passwordTextInputLayout.getText().toString().trim();
+            public void onClick(View v) {
+                // Aquí agregas la lógica para ir al activity_register
+                irAActivityRegister();
+            }
+        });
 
-                    // Aquí debes implementar la lógica para verificar las credenciales
-                    if (isValidCredentials(email, password)) {
-                        // Iniciar sesión exitosamente
-                        startActivity(new Intent(InciarSesionActivity.this, MenuActivity.class));
-                        // Muestra un mensaje de confirmación
-                        Toast.makeText(InciarSesionActivity.this, "¡Iniciaste sesión correctamente!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Muestra un mensaje de error si las credenciales son incorrectas
-                        Toast.makeText(InciarSesionActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarSesion();
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cerrarSesion();
+            }
+        });
+    }
+
+    private void irAActivityRegister() {
+        Intent intent = new Intent(this, RegistrarseActivity.class);
+        startActivity(intent);
+    }
+
+    private void iniciarSesion() {
+        // Obtener los valores ingresados por el usuario
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        // Validar que los campos no estén vacíos
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(InciarSesionActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+// Iniciar sesión utilizando Firebase Authentication
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(InciarSesionActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Inicio de sesión exitoso
+                            Toast.makeText(InciarSesionActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                            // Redirigir al usuario a ManuActivity en lugar de AgendarHora
+                            Intent intent = new Intent(InciarSesionActivity.this, MenuActivity.class);
+                            startActivity(intent);
+                            finish(); // Cerrar la actividad actual para que el usuario no pueda volver atrás
+
+                        } else {
+                            // Inicio de sesión fallido
+                            String errorMessage = task.getException().getMessage();
+                            Toast.makeText(InciarSesionActivity.this, "Error al iniciar sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+
                     }
-                }
-            }
-        });
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Inicia la actividad de registro cuando se presiona el botón "Registrarse"
-                startActivity(new Intent(InciarSesionActivity.this, RegistrarseActivity.class));
-            }
-        });
+                });
     }
 
-    // Función para validar los campos del formulario de inicio de sesión
-    private boolean validateForm() {
-        boolean isValid = true;
-
-        String email = emailTextInputLayout.getText().toString().trim();
-        String password = passwordTextInputLayout.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email)) {
-            emailTextInputLayout.setError("Este campo es requerido");
-            isValid = false;
+    private void cerrarSesion() {
+        // Cerrar sesión en Firebase
+        if (mAuth.getCurrentUser() != null) {
+            mAuth.signOut();
+            Toast.makeText(InciarSesionActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
         } else {
-            emailTextInputLayout.setError(null);
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            passwordTextInputLayout.setError("Este campo es requerido");
-            isValid = false;
-        } else {
-            passwordTextInputLayout.setError(null);
-        }
-
-        return isValid;
-    }
-
-    private boolean isValidCredentials(String email, String password) {
-        ConexionHelper conn = new ConexionHelper(this, "Barberzur65.db", null, 1);
-        SQLiteDatabase db = conn.getReadableDatabase();
-
-        try {
-            String[] columns = {Utility.CAMPO_CONTRASENA};
-            String selection = Utility.CAMPO_CORREO + "=?";
-            String[] selectionArgs = {email};
-
-            Cursor cursor = db.query(Utility.TABLA_USUARIO, columns, selection, selectionArgs, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                String storedPassword = cursor.getString(cursor.getColumnIndex(Utility.CAMPO_CONTRASENA));
-                cursor.close();
-                return password.equals(storedPassword);
-            } else {
-                cursor.close();
-                return false;
-            }
-        } finally {
-            db.close();
+            Toast.makeText(InciarSesionActivity.this, "No hay sesión activa", Toast.LENGTH_SHORT).show();
         }
     }
 }

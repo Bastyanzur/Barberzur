@@ -19,13 +19,20 @@ public class MenuActivity extends AppCompatActivity {
 
     Button btnFotos;
 
+    Button btnCerrar;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        btnAgendar=findViewById(R.id.btnAgendar);
+
+
+        btnAgendar = findViewById(R.id.btnAgendar);
+
         btnAgendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +65,13 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MenuActivity.this, GaleriaFotos.class));
+            }
+        });
+        btnCerrar=findViewById(R.id.btnCerrar);
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MenuActivity.this, MainActivity.class));
             }
         });
 

@@ -19,16 +19,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.094" />
 
+
     <Button
         android:id="@+id/btnAgendar"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="456dp"
-        android:text="AgendarHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31" />
 
     <Button
         android:id="@+id/btnMapa"
@@ -49,10 +51,10 @@
         android:text="Horas Agendadas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.395" />
 
     <Button
         android:id="@+id/btnCancelar"
@@ -61,10 +63,9 @@
         android:text="Cancelar Hora"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <Button
         android:id="@+id/btnFotos"
@@ -76,7 +77,20 @@
         app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
+        app:layout_constraintVertical_bias="0.586" />
+
+
+    <Button
+        android:id="@+id/btnCerrar"
+        android:layout_width="165dp"
+        android:layout_height="63dp"
+        android:text="Cerrar Sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.715" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -89,5 +103,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.897"
         app:srcCompat="@drawable/mapa" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
