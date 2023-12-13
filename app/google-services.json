@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "498972982756",
+    "project_id": "barberuzurr",
+    "storage_bucket": "barberuzurr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498972982756:android:4bd0bb829901e494995bf1",
+        "android_client_info": {
+          "package_name": "com.example.barberzur"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy1IAwY2b-fOSilvyyU7QhNMVPKstwQ3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
